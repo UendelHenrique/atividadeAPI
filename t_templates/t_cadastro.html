@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+<head>
+    <title>Cadastro</title>
+    <script>
+
+    </script>
+</head>
+
+{% block conteudo %}
+
+<h2>Seja bem-vindo(a) {{nome}}</h2> 
+<!-- ao clickar no botão, no submit vai para a rota /submeterCadastro -->
+<br />
+<form action="/submit" method="POST">
+
+    <label for="username">Usuário:</label>
+    <input type="text" id="nome_login" name="nome_login" value="{{ nome_login }}" required oninput="verificarDigitacao(event)">
+
+    <label for="password">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
+    <br>
+
+    <label for="nome">Nome completo:</label>
+    <input type="text" id="nome_completo" name="nome_completo" required>
+
+    <label for="e-mail">E-mail:</label>
+    <input type="text" id="mail" name="mail" required>
+
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" required>
+
+    <label for="profissao">Profissão:</label>
+    <input type="text" id="profissao" name="profissao" required>
+
+    <input type="submit" value="Cadastrar">
+
+</form>
+
+{% endblock %}

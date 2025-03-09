@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- página template(modelo) com layout base das páginas do site -->
+
+<html lang="pt">
+  <head>
+    <meta charset="utf-8">
+    <title>Perfil do Usuário</title>
+    <link rel = "stylesheet" href="{{ url_for('static', filename = 'css/estilo.css')}}">
+
+    
+    {% block scripts %} {% endblock %}
+  </head>
+ 
+  <body>
+
+    <div>
+    <!--Informação fixa nas páginas coloca neste template -->
+    <img src="https://portal.ifro.edu.br/images/botoes_do_site/menu-de-relevancia/logotipo-IFRO-portal-principal.png" 
+         alt="logo IFRO" width = 70 height = 70>
+    <br>
+    <!--    -->
+    <p style="font-size: 1.0em;"  id="dataHora"></p>
+
+    </div>
+    
+    
+    <!-- Elemento para exibir a cotação, chama js, que chama API para obter cotação -->
+    <div id="cotacao">
+        <p>Cotação do dólar...</p>
+    </div>
+    
+    
+    <!-- Elemento para exibir a previsão do tempo -->
+    <div id="previsao-tempo">
+        <p>Carregando previsão do tempo...</p>
+        <input type="text" id="cidade" placeholder="Digite o nome da cidade">
+        <button onclick="fetchWeather(document.getElementById('cidade').value)">Buscar</button><br><br>
+    </div>
+    
+
+    <nav> 
+        <a href="/index">Página Inicial</a>
+        <a href="/contato">Contatos</a>
+        <a href="/usuario">Perfil do Usuário</a>
+        <a href="/login">Login</a>
+        <a href="/loginAPI">LoginAPI</a>
+    </nav>
+   
+
+    <!--Informação que muda nas páginas coloca como extensão -->
+    {% block conteudo %}    
+
+    {% endblock %}
+
+    <!-- Referência ao arquivo JavaScript -->
+    <script src="{{ url_for('static', filename='js/script1.js') }}"></script>
+ 
+    <!--Chama a função assim que a página carrega -->
+    <script src="{{ url_for('static', filename='js/script2.js') }}" 
+            onload="mostrarDataHora();"></script>
+
+    <h6>Copyright₢ 2025</h6> <!--Ctrl+Alt+C-->
+  </body>
+</html>

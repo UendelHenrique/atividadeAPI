@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<head>
+    <title>Login</title>
+    {% block scripts %}
+    <script>
+      function preencherNomeUsuario() {
+        // Copia o valor do campo 'nome_usuario' do primeiro formulário para o campo oculto do segundo
+        const nomeUsuario = document.getElementById("nome_usuario").value;
+        document.getElementById("nome_usuario_cadastro").value = nomeUsuario;
+      }
+
+    </script>
+    {% endblock %}
+</head>
+
+{% block conteudo %}
+    <!-- Toda vez que for trabalhar com Python dentro do HTML usa o bloco set
+        variáveis globais (set) 
+        variáveis locais (with) e (endwith)-->
+
+{% set mensagens = get_flashed_messages() %}
+{% if mensagens %}
+<div class="mensagens-flash">
+    <ul>
+        {% for msg in mensagens %}
+        <li>{{ msg }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<br />
+<!-- Formulário para login -->
+<!-- ao clickar no botão OK, no submit vai para a rota /autenticar -->
+<form action="/autenticar" method="POST" id="formLogin" onsubmit="return validarSenha()">
+    <label for="username">Usuário:</label>
+    <input type="text" id="nome_usuario" name="nome_usuario" required oninput="verificarDigitacao(event)">
+    <label for="password">Senha:</label>
+    <input type="password" id="senha" name="senha" required><br>
+    <button type="submit">Login</button>
+</form>
+<br>
+<!-- Formulário para novo cadastro -->
+<form action="/novocadastro/" method="POST" id="formCadastro" onsubmit="preencherNomeUsuario()" >
+    <input type="hidden" name="nome_usuario" id="nome_usuario_cadastro">
+    <!--nome_usuario_cadastro é hidden (oculto). É usado para armazenar o valor do nome_usuario no primeiro formulário.
+    O script preencerNomeUsuario() garante que o valor seja copiado antes de o formulário ser enviado. -->
+    <button type="submit">Novo Cadastro</button>
+</form>
+
+{% endblock %}

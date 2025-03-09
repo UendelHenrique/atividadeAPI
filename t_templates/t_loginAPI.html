@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <!-- form action="/autenticar" method="POST" > 
+     no lugar de chamar a rota /autenticar vamos chamar um script para conferir e preparar os dados para chamada da API-->
+    <form id="formLogin" >
+        <!-- ao clickar no botão OK, no submit vai para a rota /autenticar -->
+        <!-- Quando trabalha com métodos GET (padrão) ou POST (declara method) --> 
+        <br/><br/>
+       
+        Login: <input type = "text" id="login" name="login"><br/><br/>
+        Senha  : <input type = "text" id = "senha" name="senha"><br/><br/>
+        
+        <button type = "submit">OK</button> <br/><br/> <!--o submit é o type que dispara o js-->
+        
+        <div id="mensagem" style="display: none;"></div>
+    </form>
+
+    <!-- Link para o arquivo JavaScript externo -->
+    <script src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/forms.js') }}"></script>
+
+{% endblock %}
+
